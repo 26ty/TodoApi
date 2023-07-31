@@ -29,6 +29,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// 設定為 提供靜態檔案 ，並 啟用預設檔案對應。
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 // 用於啟用 HTTPS 重定向
 app.UseHttpsRedirection();
 
