@@ -9,7 +9,7 @@ builder.Services.AddControllers(); // 用於處理 HTTP 請求
 
 /* 使用 AddDbContext 方法來註冊 TodoContext 類別，
  * 使用 UseInMemoryDatabase 方法來指定使用內存資料庫，
- * 資料庫指定名稱 "TodoList"。*/
+ * 資料庫指定名稱 "TodoList"。* */
 builder.Services.AddDbContext<TodoContext>(opt =>
     opt.UseInMemoryDatabase("TodoList"));
 
