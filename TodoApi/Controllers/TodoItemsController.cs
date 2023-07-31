@@ -9,7 +9,7 @@ using TodoApi.Models;
 
 namespace TodoApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]")] // URL 路徑
     [ApiController]
     public class TodoItemsController : ControllerBase
     {
@@ -32,7 +32,7 @@ namespace TodoApi.Controllers
         }
 
         // GET: api/TodoItems/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}")] // 唯一識別碼的預留位置變數
         public async Task<ActionResult<TodoItem>> GetTodoItem(long id)
         {
           if (_context.TodoItems == null)
@@ -51,7 +51,7 @@ namespace TodoApi.Controllers
 
         // PUT: api/TodoItems/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("{id}")] // 傳送整個更新的實體，而不只是變更，部分變更==patch
         public async Task<IActionResult> PutTodoItem(long id, TodoItem todoItem)
         {
             if (id != todoItem.Id)
@@ -85,14 +85,15 @@ namespace TodoApi.Controllers
         [HttpPost]
         public async Task<ActionResult<TodoItem>> PostTodoItem(TodoItem todoItem)
         {
-          if (_context.TodoItems == null)
-          {
-              return Problem("Entity set 'TodoContext.TodoItems'  is null.");
-          }
-            _context.TodoItems.Add(todoItem);
-            await _context.SaveChangesAsync();
+          //if (_context.TodoItems == null)
+          //{
+          //    return Problem("Entity set 'TodoContext.TodoItems'  is null.");
+          //}
+            _context.TodoItems.Add(todoItem); // 在資料庫中新增一個新的 TodoItem 物件
+            await _context.SaveChangesAsync(); // 將變更保存到資料庫中
 
-            return CreatedAtAction("GetTodoItem", new { id = todoItem.Id }, todoItem);
+            // return CreatedAtAction("GetTodoItem", new { id = todoItem.Id }, todoItem);
+            return CreatedAtAction(nameof(GetTodoItem), new { id = todoItem.Id }, todoItem);
         }
 
         // DELETE: api/TodoItems/5
